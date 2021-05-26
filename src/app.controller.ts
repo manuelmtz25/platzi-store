@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -21,6 +21,11 @@ export class AppController {
     return 'Hello MMA';
   }
 
+  @Get('products/filter')
+  getProductFilter() {
+    return `Soy un filter`;
+  }
+
   // @Get('products/:productId')
   // getProduct(@Param() params: any) {
   //   return `product ${params.productId}`;
@@ -36,5 +41,24 @@ export class AppController {
   @Get('categories/:id/products/:productId')
   getCategory(@Param('productId') productId: string, @Param('id') id: string) {
     return `product ${productId} and ${id}`;
+  }
+
+  // @Get('products')
+  // getProducts(@Query() params: any) {
+  //   const { limit, offset } = params;
+  //   return `products: limit => ${limit} offset => ${offset} `;
+  // }
+
+  // http://localhost:3000/products/?limit=100&offset=200
+  // @Get('products')
+  // getProducts(@Query('limit') limit: number, @Query('offset') offset: number) {
+  //   return `products: limit => ${limit} offset => ${offset} `;
+  // }
+
+  // http://localhost:3000/products/?limit=100
+  // dar un valor por default
+  @Get('products')
+  getProducts(@Query('limit') limit: number, @Query('offset') offset = 44) {
+    return `products: limit => ${limit} offset => ${offset} `;
   }
 }
