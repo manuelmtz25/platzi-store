@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Query,
-  Param,
-  Post,
-  Body,
-  Put,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Query, Param } from '@nestjs/common';
 
 @Controller('products') // 👈 Route
 export class ProductsController {
