@@ -13,6 +13,7 @@ import {
 
 import { ProductsService } from './../../services/products/products.service';
 import { ParseIntPipe } from './../../common/parse-int.pipe';
+import { CreateProductDto, UpdateProductDto } from './../../dtos/products.dtos';
 
 @Controller('products') // 👈 Route
 export class ProductsController {
@@ -20,9 +21,6 @@ export class ProductsController {
 
   @Get()
   getProducts() {
-    // return {
-    //   message: `products limit=> ${limit} offset=> ${offset} brand=> ${brand}`,
-    // };
     return this.productsService.findAll();
   }
 
@@ -36,28 +34,16 @@ export class ProductsController {
   @Get(':productId')
   @HttpCode(HttpStatus.ACCEPTED)
   getProduct(@Param('productId', ParseIntPipe) productId: number) {
-    // return {
-    //   message: `product ${productId}`,
-    // };
     return this.productsService.findOne(+productId);
   }
 
   @Post()
-  create(@Body() payload: any) {
-    // return {
-    //   message: 'Acción para crear',
-    //   payload,
-    // };
+  create(@Body() payload: CreateProductDto) {
     return this.productsService.create(payload);
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() payload: any) {
-    // return {
-    //   id,
-    //   payload,
-    // };
-
+  update(@Param('id') id: number, @Body() payload: UpdateProductDto) {
     return this.productsService.update(+id, payload);
   }
 
